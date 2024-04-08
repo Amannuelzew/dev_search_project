@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% load static %}
 
-{% block title %}login{% endblock title %}
+{% block title %}Account{% endblock title %}
 
 {% block content %}
 {% if messages %}
@@ -12,12 +12,11 @@
 </ul>
 {% endif %}
 
-<form action="/login/" method="POST">
+<form action="/profile/" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" >
-    <button>Login</button>
+    {{form.as_p}}
+    <button>Submit</button>
 </form>
-<p>Don't have an account<a href={% url "signup" %}> sign up</a></p>
+
 
 {% endblock content %}

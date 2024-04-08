@@ -33,14 +33,14 @@
             <div class="dev">
               <a href="/profile.html" class="card__body">
                 <div class="dev__profile">
-                  <img class="avatar avatar--md" src="https://avatars.githubusercontent.com/u/22437186" alt="image" />
+                  <img class="avatar avatar--md" src="{{developer.avatar.url}}" alt="image" />
                   <div class="dev__meta">
-                    <h3>{{developer.username}}</h3>
-                    <h5>{{developer.position}}</h5>
+                    <h3>{{developer.name}}</h3>
+                    <h5>{{developer.bio}}</h5>
                   </div>
                 </div>
                 <p class="dev__info">
-                 {{developer.description}}
+                 {{developer.short_intro}}
                 </p>
                 <div class="dev__skills">
                 {% for tag in developer.tags %}

@@ -12,10 +12,10 @@
           <div class="toggle-menu__lines"></div>
         </label>
         <ul class="header__menu">
-          <li class="header__menuItem"><a href="index.html">Developers</a></li>
-          <li class="header__menuItem"><a href="projects.html">Projects</a></li>
-          <li class="header__menuItem"><a href="{% url "login" %}">Inbox</a></li>
-          <li class="header__menuItem"><a href="account.html">My Account</a></li>
+          <li class="header__menuItem"><a href="{% url "index" %}">Developers</a></li>
+          <li class="header__menuItem"><a href="{% url "projects" %}">Projects</a></li>
+          {% comment %} <li class="header__menuItem"><a href="{% url "" %}">Inbox</a></li> {% endcomment %}
+          <li class="header__menuItem"><a href="{% url "profile" %}">My Account</a></li>
           {% if user.is_authenticated %}
           <li class="header__menuItem"><a href="{% url "logout" %}">Log Out</a></li>
           {% else %}
