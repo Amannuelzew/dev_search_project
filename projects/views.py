@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect
 from datetime import date
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
-
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
 # Create your views here.
 projects=[
     {"title":"hello world","description":"hello","demo_link":"https://a.com",
@@ -23,6 +25,25 @@ developers=[
      {"username":"sam","description":"name","position":"back end web",
      "tags":["c#","c++","c","GraphQL"]}
 ]
+
+def login_page(request):
+  if request.method=="POST":
+     username=request.POST.get("username")
+     password=request.POST.get("password")
+     user=authenticate(request,username=username,password=password)
+     if user is not None:
+        login(request,user)
+        return redirect("index")
+     else:
+        print("yes")
+        messages.error(request,"does not match")
+
+  return render(request,"projects/login.html")
+
+def logout_page(request):
+   logout(request)
+   return redirect("login")
+
 def index(request):
     if request.GET.get("search_query"):
         query=request.GET.get("search_query")
