@@ -1,5 +1,8 @@
-from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializer import ProfileSerializer
 from projects.models import Profiles
+@api_view(['GET'])
 def get_routes(request):
     routes=[
         {'GET':'api/developers'},
@@ -8,7 +11,14 @@ def get_routes(request):
         {'POST':'api/developers/token'},
         {'POST':'api/developers/token/refresh'},
     ]
-    return JsonResponse(routes,safe=False)
+    return Response(routes)
+@api_view(['GET'])
 def get_developers(request):
     Profile=Profiles.objects.all()
-    return JsonResponse(Profile,safe=False)
+    s=ProfileSerializer(Profile,many=True)
+    return Response(s.data)
+@api_view(['GET'])
+def get_developer(request,id):
+    Profile=Profiles.objects.get(pk=id)
+    s=ProfileSerializer(Profile,many=False)
+    return Response(s.data)
