@@ -62,18 +62,23 @@
 
     <div class="pagination">
       <ul class="container">
-        <li><a href="#" class="btn btn--disabled">&#10094; Prev</a></li>
-        <li><a href="#" class="btn btn--sub">01</a></li>
-        <li><a href="#" class="btn">02</a></li>
-        <li><a href="#" class="btn">03</a></li>
-        <li><a href="#" class="btn">04</a></li>
-        <li><a href="#" class="btn">05</a></li>
-        <li><a href="#" class="btn">06</a></li>
-        <li><a href="#" class="btn">07</a></li>
-        <li><a href="#" class="btn">08</a></li>
-        <li><a href="#" class="btn">09</a></li>
-        <li><a href="#" class="btn">10</a></li>
-        <li><a href="#" class="btn">Next &#10095;</a></li>
+        
+        {% comment %} {% endcomment %}
+        {% if developers.has_previous %}
+        <li><a href="?page={{developers.previous_page_number}}" class="btn page-link">&#10094; Prev</a></li> 
+        {% endif %}
+        {% for page in Paginator.page_range %}
+        
+        {% if page == developers.number %}
+        <li><a href="?page={{page}}" class="btn btn--sub">{{page}}</a></li>
+        {% else %}
+        <li><a href="?page={{page}}" class="btn">{{page}}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if developers.has_next %}
+        <li><a href="?page={{developers.next_page_number}}" class="btn page-link"> Next</a></li> 
+        {% endif %}
+        
       </ul>
     </div>
   </main>
